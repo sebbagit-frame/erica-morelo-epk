@@ -12,13 +12,21 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
+.env.local
+.env.*.local
 .env.production
 
-# macOS-specific files
-.DS_Store
+# Vercel
+.vercel/
 
-# jetbrains setting folder
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editor folders
 .idea/
+.vscode/*
+!.vscode/extensions.json

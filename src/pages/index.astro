@@ -1,17 +1,36 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Bio from "../components/Bio.astro";
+import Music from "../components/Music.astro";
+import Videos from "../components/Videos.astro";
+import Press from "../components/Press.astro";
+import Photos from "../components/Photos.astro";
+import Shows from "../components/Shows.astro";
+import Marcalolo from "../components/Marcalolo.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Nav />
+  <Hero />
+  <hr class="divider" />
+  <Bio />
+  <hr class="divider" />
+  <Music />
+  <hr class="divider" />
+  <Videos />
+  <hr class="divider" />
+  <Press />
+  <hr class="divider" />
+  <Photos />
+  <hr class="divider" />
+  <Shows />
+  <hr class="divider" />
+  <Marcalolo />
+  <hr class="divider" />
+  <Contact />
+  <Footer />
+</BaseLayout>

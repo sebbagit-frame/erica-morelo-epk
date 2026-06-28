@@ -1,0 +1,40 @@
+---
+// Layout base compartido por todas las páginas.
+// Importar el CSS acá hace que Astro lo procese y lo incluya en el bundle.
+import "../styles/style.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Erica Morello",
+  description = "Erica Morello — cantante profesional, maestra vocal e integrante del dúo MARCALOLO. EPK oficial.",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Astro resuelve y bundlea este import del lado cliente -->
+    <script>
+      import "../scripts/main.js";
+    </script>
+  </body>
+</html>
