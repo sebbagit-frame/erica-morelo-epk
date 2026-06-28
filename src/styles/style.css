@@ -173,7 +173,9 @@
         linear-gradient(to top, var(--bg) 0%, rgba(254, 249, 247, 0.88) 30%, rgba(254, 249, 247, 0.15) 72%),
         url("/images/erica_hero_1.png");
       background-size: cover, cover;
-      background-position: center, top right;
+      /* Imagen al 78% horizontal: centra su figura en mobile (está a la
+         derecha del PNG, así que "center" la dejaría fuera de cuadro). */
+      background-position: center, 78% top;
       background-repeat: no-repeat;
     }
     .hero-noise {
