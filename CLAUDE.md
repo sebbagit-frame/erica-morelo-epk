@@ -1,27 +1,3 @@
-## Development
-
-When starting the dev server, use background mode:
-
-```
-astro dev --background
-```
-
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
-
-## Documentation
-
-Full documentation: https://docs.astro.build
-
-Consult these guides before working on related tasks:
-
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
-
-
 # Erica Morelo — EPK Landing Page
 
 Sitio web tipo Electronic Press Kit (EPK) para la cantante Erica Morelo. Landing page profesional con información artística, sección del dúo MARCALOLO (Erica & Marcos), música, videos, prensa, fotos, shows y contacto.
@@ -48,7 +24,7 @@ Sitio web tipo Electronic Press Kit (EPK) para la cantante Erica Morelo. Landing
 | Estilos | CSS custom properties (variables), sin Tailwind |
 | Scripts | Vanilla JS (`src/scripts/main.js`) |
 | Fuentes | Google Fonts: DM Serif Display, DM Sans |
-| Deploy | Netlify (conectado a GitHub) |
+| Deploy | Vercel (conectado a GitHub) |
 | Dominio | Pendiente configuración |
 
 ---
@@ -218,20 +194,24 @@ npm run preview          # Preview del build de producción
 
 ### Flujo previsto
 1. Push a `main` en GitHub
-2. Netlify detecta el push automáticamente
+2. Vercel detecta el push automáticamente
 3. Ejecuta `npm run build`
 4. Deploya contenido de `dist/`
 
-### Configuración Netlify
-```
-Build command:    npm run build
-Publish directory: dist/
-Node version:     22
+### Configuración Vercel
+Vercel detecta Astro automáticamente al importar el repo — no requiere configuración manual.
+Si se necesita forzar, crear `vercel.json` en la raíz de `site-new/`:
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "astro"
+}
 ```
 
 ### Dominio
 - Pendiente: registrar dominio para la clienta
-- Netlify provee subdominio gratuito: `ericamorelo.netlify.app`
+- Vercel provee subdominio gratuito: `ericamorelo.vercel.app`
 
 ---
 
@@ -251,7 +231,7 @@ Node version:     22
 | Imágenes / fotos reales | ⏳ Esperando clienta |
 | Canciones / links plataformas | ⏳ Esperando clienta |
 | Shows / fechas reales | ⏳ Esperando clienta |
-| Deploy Netlify | ⏳ Pendiente |
+| Deploy Vercel | ⏳ Pendiente |
 | Dominio personalizado | ⏳ Pendiente |
 | SEO meta tags (Open Graph, Twitter) | ⏳ Pendiente |
 | Favicon personalizado | ⏳ Pendiente |
@@ -264,3 +244,17 @@ Node version:     22
 - Para agregar fotos: colocar en `public/fotos/` y referenciar en `Fotos.astro`
 - Para cambiar paleta: solo tocar variables en `global.css`
 - Para agregar página (ej: /marcalolo): crear `src/pages/marcalolo.astro`
+
+
+
+## Referencias Astro
+
+Consultar antes de trabajar en tareas relacionadas:
+
+- [Páginas y rutas dinámicas](https://docs.astro.build/en/guides/routing/)
+- [Componentes Astro](https://docs.astro.build/en/basics/astro-components/)
+- [Estilos y Tailwind](https://docs.astro.build/en/guides/styling/)
+- [Colecciones de contenido](https://docs.astro.build/en/guides/content-collections/)
+- [Internacionalización](https://docs.astro.build/en/guides/internationalization/)
+
+Docs completas: https://docs.astro.build
