@@ -32,6 +32,130 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── Header / Nav (fijo + shrink al scrollear) ───────── */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      /* Estado inicial: fondo sólido + padding vertical 20px */
+      padding: 20px 0;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: padding 0.3s ease, background 0.3s ease,
+        border-color 0.3s ease;
+    }
+    /* Al scrollear > 50px (clase agregada por main.js): compacto + translúcido */
+    .site-header.scrolled {
+      padding: 10px 0;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--border);
+    }
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Base = mobile: los links son un panel desplegable bajo el header */
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding: 8px 20px 16px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+    .nav-links.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 14px 2px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-2);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .nav-links li:last-child a { border-bottom: none; }
+    .nav-links a:hover { color: var(--text-1); }
+
+    /* Botón hamburguesa (visible en mobile; oculto en desktop) */
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      margin-left: auto;
+      padding: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text-1);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Desktop: links inline, sin hamburguesa */
+    @media (min-width: 769px) {
+      .site-nav { padding: 0 48px; }
+      .nav-toggle { display: none; }
+      .nav-links {
+        position: static;
+        flex-direction: row;
+        gap: 32px;
+        padding: 0;
+        background: none;
+        border-bottom: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
+      }
+      .nav-links li { width: auto; }
+      .nav-links a {
+        display: inline;
+        padding: 0;
+        font-size: 13px;
+        border-bottom: none;
+      }
+    }
+
     /* ── Hero ─────────────────────────────────────────────── */
     .hero {
       min-height: 100vh;

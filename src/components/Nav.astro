@@ -1,0 +1,27 @@
+---
+// Header de navegación fijo (sticky) con efecto shrink al hacer scroll.
+// El comportamiento (clase .scrolled al pasar 50px) lo maneja src/scripts/main.js.
+---
+
+<header class="site-header" id="site-header">
+  <nav class="site-nav" aria-label="Navegación principal">
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#bio">Bio</a></li>
+      <li><a href="#musica">Música</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#shows">Shows</a></li>
+      <li><a href="#marcalolo">MARCALOLO</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
