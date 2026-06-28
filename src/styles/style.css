@@ -93,6 +93,16 @@
       padding: 120px 48px 80px;
       position: relative;
       overflow: hidden;
+      /* La imagen es un PNG transparente (recorte): el color de fondo se ve
+         a través de la zona vacía. El degradado suaviza el borde izquierdo de
+         su silueta para que se funda con la página sin corte visible. */
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(to right, var(--bg) 0%, var(--bg) 60%, rgba(254, 249, 247, 0) 76%),
+        url("/images/erica_hero_1.png");
+      background-size: cover, cover;
+      background-position: center, center right;
+      background-repeat: no-repeat;
     }
     .hero-noise {
       position: absolute; inset: 0;
@@ -671,7 +681,15 @@
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .hero { padding: 100px 20px 60px; }
+      .hero {
+        padding: 100px 20px 60px;
+        /* En mobile la foto panorámica se reposiciona arriba-derecha
+           y el texto se apoya sobre un velo inferior. */
+        background-image:
+          linear-gradient(to top, var(--bg) 0%, rgba(254, 249, 247, 0.88) 30%, rgba(254, 249, 247, 0.15) 72%),
+          url("/images/erica_hero_1.png");
+        background-position: center, top right;
+      }
       .section { padding: 64px 20px; }
       .bio-layout,
       .contact-layout { grid-template-columns: 1fr; gap: 40px; }
