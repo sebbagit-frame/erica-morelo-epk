@@ -40,7 +40,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 48px;
+      padding: 0 20px;
       height: 60px;
       background: rgba(254,249,247,0.92);
       backdrop-filter: blur(12px);
@@ -54,20 +54,47 @@
       text-decoration: none;
       letter-spacing: 0.01em;
     }
+    /* Base = mobile: el menú es un panel desplegable bajo la barra fija */
     .nav-links {
-      display: flex;
-      gap: 32px;
       list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      padding: 8px 20px 16px;
+      background: rgba(254, 249, 247, 0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
     }
+    .nav-links.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .nav-links li { width: 100%; }
     .nav-links a {
-      font-size: 13px;
+      display: block;
+      padding: 14px 2px;
+      font-size: 14px;
       font-weight: 400;
       color: var(--text-2);
       text-decoration: none;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
       transition: color 0.2s;
     }
+    .nav-links li:last-child a { border-bottom: none; }
     .nav-links a:hover { color: var(--text-1); }
     .nav-cta {
       font-size: 13px;
@@ -83,6 +110,32 @@
       background: var(--accent-glow);
       border-color: var(--accent);
     }
+    /* Botón hamburguesa — oculto en desktop, visible en mobile */
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      margin-left: 4px;
+      padding: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text-1);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    /* Animación a "X" cuando el menú está abierto */
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ── Hero ─────────────────────────────────────────────── */
     .hero {
@@ -90,18 +143,18 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 120px 48px 80px;
+      padding: 100px 20px 60px;
       position: relative;
       overflow: hidden;
-      /* La imagen es un PNG transparente (recorte): el color de fondo se ve
-         a través de la zona vacía. El degradado suaviza el borde izquierdo de
-         su silueta para que se funda con la página sin corte visible. */
+      /* PNG transparente (recorte): el color de fondo se ve a través de la zona
+         vacía. Base = mobile (foto arriba-derecha + velo inferior); en desktop
+         pasa a la derecha con degradado horizontal (ver @media min-width: 769px). */
       background-color: var(--bg);
       background-image:
-        linear-gradient(to right, var(--bg) 0%, var(--bg) 60%, rgba(254, 249, 247, 0) 76%),
+        linear-gradient(to top, var(--bg) 0%, rgba(254, 249, 247, 0.88) 30%, rgba(254, 249, 247, 0.15) 72%),
         url("/images/erica_hero_1.png");
       background-size: cover, cover;
-      background-position: center, center right;
+      background-position: center, top right;
       background-repeat: no-repeat;
     }
     .hero-noise {
@@ -227,7 +280,7 @@
 
     /* ── Section wrapper ─────────────────────────────────── */
     .section {
-      padding: 100px 48px;
+      padding: 64px 20px;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -266,8 +319,8 @@
     /* ── Bio ─────────────────────────────────────────────── */
     .bio-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: 1fr;
+      gap: 40px;
       align-items: start;
     }
     .bio-text p {
@@ -379,7 +432,7 @@
     /* ── Video ─────────────────────────────────────────── */
     .videos-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 20px;
     }
     .video-card { position: relative; }
@@ -441,7 +494,7 @@
     .press-bg { background: var(--bg-2); }
     .press-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr;
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
@@ -470,7 +523,7 @@
     /* ── Fotos ─────────────────────────────────────────── */
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
     .photo-placeholder {
@@ -509,7 +562,7 @@
       text-align: center;
     }
     .photo-large {
-      grid-row: span 2;
+      grid-row: span 1;
       aspect-ratio: auto;
     }
     .photo-download {
@@ -531,9 +584,9 @@
     }
     .show-row {
       display: grid;
-      grid-template-columns: 64px 1fr auto;
+      grid-template-columns: 52px 1fr;
       align-items: center;
-      gap: 28px;
+      gap: 16px;
       padding: 24px 28px;
       background: var(--bg-2);
       transition: background 0.15s;
@@ -565,6 +618,7 @@
       color: var(--text-3);
     }
     .show-ticket-link {
+      display: none;
       font-size: 13px;
       font-weight: 500;
       color: var(--accent-light);
@@ -583,8 +637,8 @@
     /* ── Contacto ─────────────────────────────────────── */
     .contact-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: 1fr;
+      gap: 40px;
       align-items: start;
     }
     .contact-intro {
@@ -648,10 +702,13 @@
     /* ── Footer ─────────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 32px 48px;
+      padding: 32px 24px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
+      text-align: center;
       max-width: 100%;
     }
     .footer-logo {
@@ -677,37 +734,61 @@
     }
     .footer-socials a:hover { color: var(--text-1); }
 
-    /* ── Responsive ─────────────────────────────────────── */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .hero {
-        padding: 100px 20px 60px;
-        /* En mobile la foto panorámica se reposiciona arriba-derecha
-           y el texto se apoya sobre un velo inferior. */
-        background-image:
-          linear-gradient(to top, var(--bg) 0%, rgba(254, 249, 247, 0.88) 30%, rgba(254, 249, 247, 0.15) 72%),
-          url("/images/erica_hero_1.png");
-        background-position: center, top right;
+    /* ── Responsive (mobile-first: base = mobile; se agranda desde 769px) ─── */
+    @media (min-width: 769px) {
+      nav { padding: 0 48px; }
+      .nav-toggle { display: none; }
+      /* El menú vuelve a ser una fila inline en la barra */
+      .nav-links {
+        position: static;
+        flex-direction: row;
+        gap: 32px;
+        padding: 0;
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
       }
-      .section { padding: 64px 20px; }
+      .nav-links li { width: auto; }
+      .nav-links a {
+        display: inline;
+        padding: 0;
+        font-size: 13px;
+        border-bottom: none;
+      }
+      .hero {
+        padding: 120px 48px 80px;
+        background-image:
+          linear-gradient(to right, var(--bg) 0%, var(--bg) 60%, rgba(254, 249, 247, 0) 76%),
+          url("/images/erica_hero_1.png");
+        background-position: center, center right;
+      }
+      .section { padding: 100px 48px; }
       .bio-layout,
-      .contact-layout { grid-template-columns: 1fr; gap: 40px; }
-      .stats-list { grid-template-columns: 1fr 1fr; }
-      .press-grid { grid-template-columns: 1fr; }
-      .videos-grid { grid-template-columns: 1fr; }
-      .photo-grid { grid-template-columns: 1fr 1fr; }
-      .photo-large { grid-row: span 1; }
-      .show-row { grid-template-columns: 52px 1fr; gap: 16px; }
-      .show-ticket-link { display: none; }
-      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .contact-layout { grid-template-columns: 1fr 1fr; gap: 80px; }
+      .press-grid { grid-template-columns: repeat(3, 1fr); }
+      .videos-grid { grid-template-columns: 1fr 1fr; }
+      .photo-grid { grid-template-columns: repeat(3, 1fr); }
+      .photo-large { grid-row: span 2; }
+      .show-row { grid-template-columns: 64px 1fr auto; gap: 28px; }
+      .show-ticket-link { display: inline-block; }
+      .marcalolo-layout { grid-template-columns: 1fr 1fr; gap: 60px; }
+      footer {
+        flex-direction: row;
+        gap: 0;
+        text-align: left;
+      }
     }
 
     /* ── MARCALOLO ─────────────────────────────────────────── */
     .marcalolo-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      grid-template-columns: 1fr;
+      gap: 32px;
       align-items: start;
     }
     .marcalolo-badge {
@@ -793,10 +874,6 @@
       color: var(--text-2);
       line-height: 1.5;
     }
-    @media (max-width: 768px) {
-      .marcalolo-layout { grid-template-columns: 1fr; gap: 32px; }
-    }
-
     /* ── Scroll fade-in ─────────────────────────────────── */
     .fade-in {
       opacity: 0;
