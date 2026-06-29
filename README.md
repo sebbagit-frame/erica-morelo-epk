@@ -47,26 +47,4 @@ npm run build      # compilar a ./dist/
 npm run preview    # previsualizar el build de producción
 ```
 
----
-
-## ☁️ Despliegue (Vercel)
-
-Despliegue automático vía integración Git:
-
-1. Conectar el repositorio en [vercel.com/new](https://vercel.com/new).
-2. Vercel detecta Astro solo (Framework Preset: **Astro**, sin configuración manual).
-3. `push` a `main` → **deploy a producción**.
-4. Cada Pull Request → **Preview Deployment** con URL propia para revisar antes de publicar.
-
----
-
-## 🎨 Cómo cargar contenido
-
-- **EPK PDF:** colocar `epk-erica-morelo.pdf` en `public/docs/`.
-- **Fotos de prensa:** agregar a `public/images/press/`.
-- **Audios:** agregar a `public/audio/`.
-- **Editar una sección:** modificar el componente correspondiente en `src/components/`.
-
----
-
 © Erica Morello. Todos los derechos reservados.
